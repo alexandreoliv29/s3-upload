@@ -25,28 +25,6 @@ const config = {
     secretAccessKey: SECRET_ACCESS_KEY,
 }
 
-export async function UploadImageToS3(file) {
-    let location = '';
-
-    const params = {
-        Bucket: S3_BUCKET,
-        Key: `wines/` + file.name,
-        Body: file,
-        ACL: 'public-read',
-        ContentType: file.type
-    };
-
-    try {
-        await bucket.send(new PutObjectCommand(params));
-        console.log("SUCCESS");
-        location = 'fada-wine.s3.amazonaws.com/' + `wines/` + file.name;
-    } catch (error) {
-        return error.toString()
-    }
-    
-    return location
-}
-
 const UploadImageToS3WithReactS3 = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
